@@ -1,8 +1,8 @@
 import { createRoot } from 'react-dom/client';
 
-import { EntryPoint } from './ui';
+import { EntryPoint } from '@/workspace';
 
-import './index.less';
+import '@/common/styles/index.less';
 
 const rootElement = document.getElementById('llm-space-root');
 

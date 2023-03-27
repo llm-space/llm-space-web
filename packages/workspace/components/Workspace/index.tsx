@@ -1,4 +1,3 @@
-import { Button } from 'antd';
 import cn from 'classnames';
 
 import styles from './index.module.less';
