@@ -32,6 +32,7 @@
     "vite-tsconfig-paths": "^4.0.7"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
     "@rollup/plugin-replace": "^5.0.2",
     "@uiw/react-split": "^5.8.10",
     "antd": "^5.3.2",
