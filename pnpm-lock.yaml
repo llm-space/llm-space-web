@@ -8,6 +8,7 @@ specifiers:
   '@types/react-dom': ^18.0.11
   '@typescript-eslint/eslint-plugin': ^5.56.0
   '@typescript-eslint/parser': ^5.56.0
+  '@uiw/react-split': ^5.8.10
   '@vitejs/plugin-react': ^3.1.0
   '@vue/compiler-sfc': ^3.2.47
   antd: ^5.3.2
@@ -29,6 +30,7 @@ specifiers:
 
 dependencies:
   '@rollup/plugin-replace': 5.0.2
+  '@uiw/react-split': 5.8.10_biqbaboplfbrettd7655fr4n2y
   antd: 5.3.2_biqbaboplfbrettd7655fr4n2y
   classnames: 2.3.2
   dotenv: 16.0.3
@@ -1006,6 +1008,16 @@ packages:
       '@typescript-eslint/types': 5.56.0
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@uiw/react-split/5.8.10_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-gqfZtcU+nDmI0AYwBQxIBS8s916kbPLM+ehfiIksJFwrAWHfSlC/j0+u/4YVFSL3B4q+UKqMoXlUj3Lb7qt29g==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@vitejs/plugin-react/3.1.0_vite@4.2.1:
     resolution: {integrity: sha512-AfgcRL8ZBhAlc3BFdigClmTUMISmmzHn7sB2h9U1odvc5U/MjWXsAaz18b/WoppUTDBzxOJwo2VdClfUcItu9g==}
