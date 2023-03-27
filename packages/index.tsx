@@ -1,8 +1,8 @@
 import { createRoot } from 'react-dom/client';
 
-import { App } from './ui';
+import { EntryPoint } from './ui';
 
-import 'antd/dist/reset.css';
+import './index.less';
 
 const rootElement = document.getElementById('llm-space-root');
 
@@ -11,4 +11,4 @@ if (!rootElement) {
 }
 
 const root = createRoot(rootElement);
-root.render(<App />);
+root.render(<EntryPoint />);
