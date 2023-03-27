@@ -8,8 +8,12 @@
 }
 
 .sideBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 56px;
   height: 100%;
+  padding-top: 8px;
 }
 
 .main {
@@ -28,6 +32,18 @@
   height: 56px;
   background: @workbench-header-bg;
   border-bottom: @border;
+
+  h2 {
+    margin: 0;
+    padding: 0 0 0 8px;
+  }
+
+  .right {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    padding: 0 8px;
+  }
 }
 
 .content {
