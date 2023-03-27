@@ -1,1 +1,1 @@
-export * from './entry-point';
+export * from './components/Workspace';
