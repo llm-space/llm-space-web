@@ -1,6 +1,8 @@
 import { createRoot } from 'react-dom/client';
 
-import { App } from './App';
+import { App } from './ui';
+
+import 'antd/dist/reset.css';
 
 const rootElement = document.getElementById('llm-space-root');
 

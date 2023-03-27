@@ -1,8 +1,6 @@
 import { ConfigProvider } from 'antd';
 import us_EN from 'antd/locale/en_US';
 
-import 'antd/dist/reset.css';
-
 export function App() {
   return (
     <ConfigProvider locale={us_EN}>
