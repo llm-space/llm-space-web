@@ -1,0 +1,16 @@
+# Output
+dist
+
+# Node.js
+node_modules
+
+# Log files
+*.log
+
+# temp
+*.out
+*tmp*
+
+# Environment
+.env
+.cookies
