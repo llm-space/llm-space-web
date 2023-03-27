@@ -4,11 +4,11 @@ import { App as ChatSpace } from '@/chat-space/app';
 
 import styles from './index.module.less';
 
-export interface WorkspaceProps {
+export interface WorkbenchProps {
   className?: string;
 }
 
-export function Workspace({ className }: WorkspaceProps) {
+export function Workbench({ className }: WorkbenchProps) {
   return (
     <div className={cn(styles.container, className)}>
       <aside className={styles.sideBar}></aside>

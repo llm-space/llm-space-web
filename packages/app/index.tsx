@@ -1,7 +1,7 @@
 import { ConfigProvider } from 'antd';
 import us_EN from 'antd/locale/en_US';
 
-import { Workspace } from '@/workspace';
+import { Workbench } from '@/workbench';
 
 import styles from './index.module.less';
 
@@ -16,7 +16,7 @@ export function App() {
       }}
     >
       <div className={styles.container}>
-        <Workspace />
+        <Workbench />
       </div>
     </ConfigProvider>
   );
