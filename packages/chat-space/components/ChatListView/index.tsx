@@ -50,6 +50,7 @@ export function ChatListView({ className }: ChatListViewProps) {
       messages: [],
       lastMessage: {
         id: '3',
+        chatId: '2',
         sender: { role: 'assistant' },
         contentType: 'text/markdown',
         content: '橙色, 胡萝卜, 美食',
