@@ -13,6 +13,7 @@
   align-items: center;
   height: 48px;
   padding: 0 12px;
+  background: rgba(0, 0, 0, 0.02);
   border-bottom: @border;
 
   h3 {
@@ -35,14 +36,76 @@
   flex-direction: column;
   flex-grow: 1;
   width: 100%;
-  height: 100%;
 }
 
 .list {
   display: flex;
+  flex-direction: column;
   overflow: auto;
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 8px;
+  background: #fcfcfc;
+}
+
+.dropdownButton {
+  width: unset;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+  margin-bottom: 4px;
+  overflow: hidden;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  > header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+
+    h4 {
+      margin: 0 0 0 8px;
+      padding: 0;
+    }
+  }
+
+  &.selected,
+  &.selected:hover {
+    background: #e6f0fd;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 128, 0.02);
+  }
+}
+
+.provider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: white;
+  background: #74aa9c;
+  border-radius: 100%;
+  font-size: 12px;
+}
+
+.lastMessageContent {
+  display: -webkit-box;
+  flex-grow: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.5);
+  height: 36px;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-align: center;
+  -webkit-box-orient: vertical;
 }

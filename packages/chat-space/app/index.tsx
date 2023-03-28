@@ -14,7 +14,7 @@ export function App() {
       <main className={styles.chatDetailContainer}>
         <ChatDetailView />
       </main>
-      <aside className={styles.chatSettingsContainer}>Chat Settings</aside>
+      <aside className={styles.chatSettingsContainer}></aside>
     </Split>
   );
 }

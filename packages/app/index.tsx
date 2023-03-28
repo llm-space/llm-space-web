@@ -7,14 +7,7 @@ import styles from './index.module.less';
 
 export function App() {
   return (
-    <ConfigProvider
-      locale={us_EN}
-      theme={{
-        token: {
-          colorPrimary: '#3888ff',
-        },
-      }}
-    >
+    <ConfigProvider locale={us_EN}>
       <div className={styles.container}>
         <Workbench />
       </div>

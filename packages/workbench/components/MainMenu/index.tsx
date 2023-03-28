@@ -7,5 +7,5 @@ export interface MainMenuProps {
 }
 
 export function MainMenu({ className }: MainMenuProps) {
-  return <div className={cn(styles.container, className)}>MainMenu</div>;
+  return <div className={cn(styles.container, className)}></div>;
 }

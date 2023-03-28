@@ -4,6 +4,7 @@ import { App as ChatSpace } from '@/chat-space/app';
 
 import { Avatar } from '../Avatar';
 import { Logo } from '../Logo';
+import { MainMenu } from '../MainMenu';
 
 import styles from './index.module.less';
 
@@ -16,19 +17,11 @@ export function Workbench({ className }: WorkbenchProps) {
     <div className={cn(styles.container, className)}>
       <aside className={styles.sideBar}>
         <Logo />
+        <MainMenu className={styles.mainMenu} />
+        <Avatar />
       </aside>
       <main className={styles.main}>
-        <header className={styles.header}>
-          <div>
-            <h2>ChatSpace</h2>
-          </div>
-          <aside className={styles.right}>
-            <Avatar />
-          </aside>
-        </header>
-        <main className={styles.content}>
-          <ChatSpace />
-        </main>
+        <ChatSpace />
       </main>
     </div>
   );
