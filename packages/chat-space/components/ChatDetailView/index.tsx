@@ -1,5 +1,6 @@
 import cn from 'classnames';
 
+import { MessageBox } from '../MessageBox';
 import { MessageListView } from '../MessageListView';
 
 import styles from './index.module.less';
@@ -14,6 +15,7 @@ export function ChatDetailView({ className }: ChatDetailViewProps) {
       <header className={styles.header}></header>
       <main className={styles.main}>
         <MessageListView />
+        <MessageBox className={styles.messageBox} />
       </main>
     </div>
   );

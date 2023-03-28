@@ -1,0 +1,24 @@
+@import '@/common/styles/variables.less';
+
+.container {
+  display: flex;
+  height: fit-content;
+  background: white;
+  border: @border;
+  border-radius: 8px;
+  transition: border 0.2s ease-in-out;
+
+  &:hover {
+    border: 1px solid lighten(@primary-color, 25%);
+  }
+
+  &:focus-within {
+    border: 1px solid @primary-color;
+  }
+}
+
+.textarea {
+  height: fit-content;
+  max-height: 120px;
+  min-height: 54px !important;
+}
