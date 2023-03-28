@@ -9,9 +9,12 @@ import styles from './index.module.less';
 
 export interface ChatListViewProps {
   className?: string;
+  selectionId: string | null;
+  data: Chat[];
+  onSelect?: (id: string) => void;
 }
 
-export function ChatListView({ className }: ChatListViewProps) {
+export function ChatListView({ className, selectionId, data, onSelect }: ChatListViewProps) {
   const menuProps = {
     items: [
       {
@@ -28,36 +31,9 @@ export function ChatListView({ className }: ChatListViewProps) {
       },
     ],
   };
-  const data: Chat[] = [
-    {
-      id: '1',
-      provider: 'gpt-3.5-turbo',
-      subject: '橙色食物菜谱',
-      messages: [],
-      lastMessage: {
-        id: '3',
-        chatId: '1',
-        sender: { role: 'assistant' },
-        contentType: 'text/markdown',
-        content:
-          '橙色食物有很多种类，比如胡萝卜、南瓜、芒果、木瓜、柑橘、红薯等1。这些食物都富含胡萝卜素，可以转化成维生素A，有助于保持良好的视力和免疫力2。你可以根据你孩子的喜好，用这些食物做一些美味的菜肴，比如南瓜饼、胡萝卜汤、木瓜牛奶、芒果冰淇淋等。',
-      },
-    },
-    {
-      id: '2',
-      provider: 'stable-diffusion-2.1',
-      subject: '画一个胡萝卜',
-      messages: [],
-      lastMessage: {
-        id: '3',
-        chatId: '2',
-        sender: { role: 'assistant' },
-        contentType: 'text/markdown',
-        content: '橙色, 胡萝卜, 美食',
-      },
-    },
-  ];
-  const selectionId = '1';
+  const handleItemClick = (id: string) => {
+    onSelect && onSelect(id);
+  };
   return (
     <div className={cn(styles.container, className)}>
       <header className={styles.header}>
@@ -71,7 +47,11 @@ export function ChatListView({ className }: ChatListViewProps) {
       <main className={styles.main}>
         <ul className={styles.list}>
           {data.map((chat) => (
-            <li key={chat.id} className={cn(styles.chat, { [styles.selected]: selectionId === chat.id })}>
+            <li
+              key={chat.id}
+              className={cn(styles.chat, { [styles.selected]: selectionId === chat.id })}
+              onClick={() => handleItemClick(chat.id)}
+            >
               <header>
                 <ProviderLogo provider={chat.provider} />
                 <h4>{chat.subject}</h4>
