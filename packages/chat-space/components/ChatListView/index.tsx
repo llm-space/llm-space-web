@@ -33,8 +33,10 @@ export function ChatListView({ className }: ChatListViewProps) {
       id: '1',
       provider: 'gpt-3.5-turbo',
       subject: '橙色食物菜谱',
+      messages: [],
       lastMessage: {
         id: '3',
+        chatId: '1',
         sender: { role: 'assistant' },
         contentType: 'text/markdown',
         content:
@@ -45,6 +47,7 @@ export function ChatListView({ className }: ChatListViewProps) {
       id: '2',
       provider: 'stable-diffusion-2.1',
       subject: '画一个胡萝卜',
+      messages: [],
       lastMessage: {
         id: '3',
         sender: { role: 'assistant' },
