@@ -1,5 +1,3 @@
-import cn from 'classnames';
-
 import type { Message } from '@/core';
 
 import styles from './index.module.less';

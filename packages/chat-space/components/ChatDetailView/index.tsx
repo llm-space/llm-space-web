@@ -14,7 +14,7 @@ export function ChatDetailView({ className }: ChatDetailViewProps) {
     <div className={cn(styles.container, className)}>
       <header className={styles.header}></header>
       <main className={styles.main}>
-        <MessageListView />
+        <MessageListView className={styles.messageList} />
         <MessageBox className={styles.messageBox} />
       </main>
     </div>

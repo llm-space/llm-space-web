@@ -32,9 +32,14 @@
   background: linear-gradient(180deg, @workbench-content-bg 0%, #e7edfd 100%);
 }
 
+.messageList {
+  flex-grow: 1;
+}
+
 .messageBox {
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
+  margin: 16px;
+
+  textarea {
+    max-height: 420px;
+  }
 }
