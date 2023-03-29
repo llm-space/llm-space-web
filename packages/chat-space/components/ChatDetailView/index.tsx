@@ -32,11 +32,21 @@ export function ChatDetailView({ className, data, onSend }: ChatDetailViewProps)
   );
   return (
     <div className={cn(styles.container, className)}>
-      <header className={styles.header}></header>
+      <header className={styles.header}>
+        <ChatDetailHeader data={data} />
+      </header>
       <main className={styles.main}>
         <MessageListView className={styles.messageList} data={data.messages} />
         <MessageBox className={styles.messageBox} onSend={handleSendMessage} />
       </main>
+    </div>
+  );
+}
+
+function ChatDetailHeader({ data }: ChatDetailViewProps) {
+  return (
+    <div>
+      <h3>{data.subject ? data.subject : 'New Chat'}</h3>
     </div>
   );
 }
