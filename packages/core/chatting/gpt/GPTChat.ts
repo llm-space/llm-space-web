@@ -2,7 +2,6 @@ import { v4 as uuid } from 'uuid';
 
 import type { Message } from '../../messaging';
 import { AbstractChat } from '../AbstractChat';
-import { nameChatSubject } from '../auto-naming';
 import type { SendMessageOptions } from '../Chat';
 
 const BASE_API_URL = '//localhost:3000/api';

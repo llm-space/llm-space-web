@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useSnapshot } from 'valtio';
 
 import type { ChatManager, Message } from '@/core';
-import { chatManager, nameChatSubject } from '@/core';
+import { autoNameChatSubject, chatManager } from '@/core';
 
 import { ChatDetailView } from '../components/ChatDetailView';
 import { ChatListView } from '../components/ChatListView';
@@ -33,7 +33,7 @@ export function App() {
     if (chat) {
       const autoNaming = chat.messages.length === 0 && chat.subject === '';
       if (autoNaming) {
-        nameChatSubject(chat.id, message);
+        autoNameChatSubject(chat.id, message);
       }
       await chat.sendMessage(message);
     }

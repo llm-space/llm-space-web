@@ -6,7 +6,7 @@ import { chatManager } from './ChatManager';
 
 let namingChat!: Chat;
 
-export async function nameChatSubject(chatId: string, message: Message) {
+export async function autoNameChatSubject(chatId: string, message: Message) {
   if (!namingChat) {
     namingChat = await chatManager.newChat('gpt-3.5-turbo', 'INTERNAL: naming');
   }
