@@ -19,12 +19,12 @@ export class ChatManager {
     return this.activeChatId ? this.getChat(this.activeChatId) : null;
   }
 
-  async newChat(provider: string): Promise<Chat> {
+  async newChat(provider: string, subject?: string): Promise<Chat> {
     const chatProvider = this._providerMap.get(provider);
     if (!chatProvider) {
       throw new Error(`No chat provider registered with id ${provider}`);
     }
-    const chat = await chatProvider.newChat();
+    const chat = await chatProvider.newChat(subject);
     return chat;
   }
 

@@ -9,9 +9,9 @@ export class GPTChatProvider extends AbstractChatProvider {
     super('gpt-3.5-turbo', 'GPT-3.5 Turbo');
   }
 
-  async newChat() {
+  async newChat(subject?: string) {
     const id = uuid();
-    const chat = new GPTChat(id);
+    const chat = new GPTChat(id, subject);
     return chat;
   }
 }

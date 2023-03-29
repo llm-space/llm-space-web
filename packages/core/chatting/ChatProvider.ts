@@ -4,5 +4,5 @@ export interface ChatProvider {
   id: string;
   name: string;
 
-  newChat(): Promise<Chat>;
+  newChat(subject?: string): Promise<Chat>;
 }
