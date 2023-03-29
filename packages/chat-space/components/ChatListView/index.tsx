@@ -6,7 +6,7 @@ import { useMemo, useState } from 'react';
 import type { Chat } from '@/core';
 import { chatManager } from '@/core';
 
-import { ProviderLogo } from '../ProviderLogo';
+import { ProviderIcon } from '../ProviderIcon';
 
 import styles from './index.module.less';
 
@@ -58,7 +58,7 @@ export function ChatListView({ className, selectionId, data, onSelect, onNewChat
               onClick={() => handleItemClick(chat.id)}
             >
               <header>
-                <ProviderLogo provider={chat.provider} />
+                <ProviderIcon provider={chat.provider} />
                 <h4>{chat.subject ? chat.subject : 'New Chat'}</h4>
               </header>
               <div className={styles.lastMessageContent}>{chat.lastMessage?.content}</div>
