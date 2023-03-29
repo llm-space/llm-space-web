@@ -1,7 +1,7 @@
 import type { MenuProps } from 'antd';
 import { Dropdown } from 'antd';
 import cn from 'classnames';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import type { Chat } from '@/core';
 import { chatManager } from '@/core';
@@ -19,12 +19,16 @@ export interface ChatListViewProps {
 }
 
 export function ChatListView({ className, selectionId, data, onSelect, onNewChat }: ChatListViewProps) {
+  const [defaultProvider, setDefaultProvider] = useState(chatManager.providers[0].id);
   const menuProps = useMemo<MenuProps>(
     () => ({
       items: chatManager.providers.map((p) => ({
         key: p.id,
         label: p.name,
-        onClick: () => onNewChat?.(p.id),
+        onClick: () => {
+          setDefaultProvider(p.id);
+          onNewChat?.(p.id);
+        },
       })),
     }),
     [onNewChat]
@@ -33,7 +37,7 @@ export function ChatListView({ className, selectionId, data, onSelect, onNewChat
     onSelect?.(id);
   };
   const handleNewChatButtonClick = async () => {
-    onNewChat?.('gpt-3.5-turbo');
+    onNewChat?.(defaultProvider);
   };
   return (
     <div className={cn(styles.container, className)}>
