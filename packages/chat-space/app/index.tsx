@@ -12,7 +12,13 @@ import { ChatListView } from '../components/ChatListView';
 import styles from './index.module.less';
 
 const chatManager = proxy(new ChatManager());
-chatManager.registerChatProvider(new GPTChatProvider());
+async function setup() {
+  chatManager.registerChatProvider(new GPTChatProvider());
+  const chat = await chatManager.newChat('gpt-3.5-turbo');
+  chatManager.addChat(chat);
+  chatManager.activateChat(chat.id);
+}
+setup();
 
 export function App() {
   const snapshot = useSnapshot(chatManager) as ChatManager;
