@@ -1,5 +1,9 @@
 import type { Message } from '../messaging/Message';
 
+export interface SendMessageOptions {
+  streamResponseCallback: (message: Message) => void;
+}
+
 export interface Chat {
   id: string;
   provider: string;
@@ -7,5 +11,7 @@ export interface Chat {
   messages: Message[];
   lastMessage?: Message;
 
-  sendMessage(message: Message): Promise<void>;
+  createUserMessage(content: string, contentType?: string): Message;
+  sendMessage(message: Message, options?: SendMessageOptions): Promise<void>;
+  clearMessages(): void;
 }

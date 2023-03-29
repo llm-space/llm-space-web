@@ -1,6 +1,8 @@
-import type { Message } from '../messaging';
+import { v4 as uuid } from 'uuid';
 
-import type { Chat } from './Chat';
+import type { Message, MessageContentType } from '../messaging';
+
+import type { Chat, SendMessageOptions } from './Chat';
 
 export abstract class AbstractChat implements Chat {
   readonly messages: Message[] = [];
@@ -8,7 +10,24 @@ export abstract class AbstractChat implements Chat {
 
   constructor(readonly provider: string, readonly id: string, public subject = '') {}
 
-  abstract sendMessage(message: Message): Promise<void>;
+  createUserMessage(content: string, contentType: MessageContentType = 'text/markdown'): Message {
+    const id = uuid();
+    return {
+      id: id,
+      chatId: this.id,
+      sender: {
+        role: 'user',
+      },
+      contentType,
+      content,
+    };
+  }
+
+  abstract sendMessage(message: Message, options?: SendMessageOptions): Promise<void>;
+
+  clearMessages() {
+    this.messages.splice(0, this.messages.length);
+  }
 
   protected appendMessage(message: Message) {
     this.messages.push(message);
