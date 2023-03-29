@@ -3,9 +3,11 @@ import { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import type { Chat, Message } from '@/core';
+import { chatManager } from '@/core';
 
 import { MessageBox } from '../MessageBox';
 import { MessageListView } from '../MessageListView';
+import { ProviderIcon } from '../ProviderIcon';
 
 import styles from './index.module.less';
 
@@ -45,8 +47,12 @@ export function ChatDetailView({ className, data, onSend }: ChatDetailViewProps)
 
 function ChatDetailHeader({ data }: ChatDetailViewProps) {
   return (
-    <div>
-      <h3>{data.subject ? data.subject : 'New Chat'}</h3>
+    <div className={styles.detailHeader}>
+      <ProviderIcon size="large" provider={data.provider} />
+      <div className={styles.detailInfo}>
+        <h3>{data.subject ? data.subject : 'New Chat'}</h3>
+        <div className={styles.provider}>{chatManager.getProviderName(data.provider)}</div>
+      </div>
     </div>
   );
 }
