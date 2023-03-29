@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client';
 
 import { App } from '@/app';
 
-import '@/common/styles/index.less';
+import '@/core/styles/index.less';
 
 const rootElement = document.getElementById('llm-space-root');
 if (!rootElement) {
