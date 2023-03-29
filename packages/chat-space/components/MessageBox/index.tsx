@@ -10,7 +10,7 @@ export interface MessageBoxProps {
 }
 
 export function MessageBox({ className, onSend: onSend }: MessageBoxProps) {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('南京和北京有哪些区别？用表格输出');
   const handleChange = useCallback((value: string) => {
     setMessage(value);
   }, []);
