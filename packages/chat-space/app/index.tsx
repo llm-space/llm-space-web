@@ -1,41 +1,41 @@
 import Split from '@uiw/react-split';
 import { useCallback } from 'react';
-import { useSnapshot } from 'valtio';
+import { proxy, useSnapshot } from 'valtio';
 
-import { chatManager } from '@/core/chatting';
+import { ChatManager } from '@/core';
+import { GPTChatProvider } from '@/core/chatting/gpt';
 
 import { ChatDetailView } from '../components/ChatDetailView';
 import { ChatListView } from '../components/ChatListView';
-import { chatStore } from '../stores';
-import type { ChatStore } from '../stores/chat-store';
-import { addChat } from '../stores/chat-store';
-import { selectChat } from '../stores/chat-store';
-import { getChat } from '../stores/chat-store';
 
 import styles from './index.module.less';
 
+const chatManager = proxy(new ChatManager());
+chatManager.registerChatProvider(new GPTChatProvider());
+
 export function App() {
-  const chatSnapshot = useSnapshot<ChatStore>(chatStore) as ChatStore;
+  const snapshot = useSnapshot(chatManager) as ChatManager;
   const handleChatListViewSelect = useCallback((id: string) => {
-    selectChat(id);
+    chatManager.activateChat(id);
   }, []);
   const handleNewChat = useCallback(async (provider: string) => {
     const chat = await chatManager.newChat(provider);
-    addChat(chat);
-    selectChat(chat.id);
+    chatManager.addChat(chat);
+    chatManager.activateChat(chat.id);
+    // TODO: scroll to top
   }, []);
-  const selectedChat = chatSnapshot.selectedChatId ? getChat(chatSnapshot.selectedChatId) : null;
+  const activeChat = snapshot.getActiveChat();
   return (
     <Split className={styles.container} lineBar>
       <nav className={styles.chatListContainer}>
         <ChatListView
-          selectionId={chatSnapshot.selectedChatId}
-          data={chatSnapshot.chats}
+          selectionId={snapshot.activeChatId}
+          data={snapshot.chats}
           onSelect={handleChatListViewSelect}
           onNewChat={handleNewChat}
         />
       </nav>
-      <main className={styles.chatDetailContainer}>{selectedChat && <ChatDetailView data={selectedChat} />}</main>
+      <main className={styles.chatDetailContainer}>{activeChat && <ChatDetailView data={activeChat} />}</main>
       <aside className={styles.chatSettingsContainer}></aside>
     </Split>
   );
