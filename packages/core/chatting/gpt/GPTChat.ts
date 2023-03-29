@@ -46,7 +46,7 @@ export class GPTChat extends AbstractChat {
         const { value, done } = await reader.read();
         const textValue = value?.toString().replace(/\n\ndata:\s/g, '');
         const extractedValue = textValue?.substr(6, textValue.length - 6 - 2) ?? '';
-        if (extractedValue && extractedValue !== '[DONE]') {
+        if (extractedValue) {
           streamingMessage = this.getMessage(messageId);
           if (streamingMessage) {
             streamingMessage.content += extractedValue;
@@ -59,29 +59,4 @@ export class GPTChat extends AbstractChat {
       }
     }
   }
-
-  // async sendMessage(message: Message) {
-  //   const messagesSnapshot = [...this.messages, message];
-  //   this.appendMessage(message);
-  //   const res = await fetch(`${BASE_API_URL}/openai/chat/completion`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       messages: messagesSnapshot,
-  //     }),
-  //   });
-  //   const content = await res.text();
-  //   const responseMessage: Message = {
-  //     id: uuid(),
-  //     chatId: message.chatId,
-  //     sender: {
-  //       role: 'assistant',
-  //     },
-  //     contentType: 'text/markdown',
-  //     content,
-  //   };
-  //   this.appendMessage(responseMessage);
-  // }
 }

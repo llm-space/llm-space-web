@@ -44,7 +44,7 @@ app.post('/api/openai/chat/completion', async (req, res) => {
         .map((l) => l.trim().split('data: ')[1]);
       chunks.forEach((chunk) => {
         if (chunk === '[DONE]') {
-          res.end('data: [DONE]\n\n');
+          res.end();
         } else {
           const json = JSON.parse(chunk);
           if (json.choices[0].delta.content) {
