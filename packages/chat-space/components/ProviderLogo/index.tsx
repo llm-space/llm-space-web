@@ -2,12 +2,13 @@ import cn from 'classnames';
 
 import styles from './index.module.less';
 
-export interface ProviderLogoProps {
+export interface ProviderIconProps {
   className?: string;
   provider: string;
+  size?: 'small' | 'medium' | 'large';
 }
 
-export function ProviderLogo({ className, provider }: ProviderLogoProps) {
+export function ProviderIcon({ className, provider, size }: ProviderIconProps) {
   let short = 'N/A';
   if (provider.startsWith('gpt')) {
     short = 'GPT';
@@ -16,5 +17,5 @@ export function ProviderLogo({ className, provider }: ProviderLogoProps) {
   } else if (provider.startsWith('belle')) {
     short = 'BEL';
   }
-  return <div className={cn(styles.container, className)}>{short}</div>;
+  return <div className={cn(styles.container, className, size && { [styles[size]]: true })}>{short}</div>;
 }
