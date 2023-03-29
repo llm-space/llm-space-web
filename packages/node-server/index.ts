@@ -1,8 +1,14 @@
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as express from 'express';
-import type { CreateChatCompletionRequest } from 'openai';
+import type {
+  ChatCompletionRequestMessage,
+  ChatCompletionRequestMessageRoleEnum,
+  CreateChatCompletionRequest,
+} from 'openai';
 import { Configuration, OpenAIApi } from 'openai';
+
+import type { Message } from '@/core';
 
 const app = express();
 app.use(cors());
@@ -14,10 +20,10 @@ const openai = new OpenAIApi(
   })
 );
 
-app.post('/openai/chat/completion', async (req, res) => {
+app.post('/api/openai/chat/completion', async (req, res) => {
   const completionReq: CreateChatCompletionRequest = {
     model: 'gpt-3.5-turbo',
-    messages: req.body.messages,
+    messages: (req.body.messages as Message[]).map(convertMessageToChatCompletionRequestMessage),
   };
   if (req.query.partial === 'true') {
     const partialCompletionRes = await openai.createChatCompletion(
@@ -61,3 +67,10 @@ app.post('/openai/chat/completion', async (req, res) => {
 app.listen(3000, () => {
   console.log('LLMSpace server is now running at port 3000.');
 });
+
+function convertMessageToChatCompletionRequestMessage(message: Message): ChatCompletionRequestMessage {
+  return {
+    role: message.sender.role as ChatCompletionRequestMessageRoleEnum,
+    content: message.content,
+  };
+}
