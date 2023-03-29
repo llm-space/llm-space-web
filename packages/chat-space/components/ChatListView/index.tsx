@@ -12,9 +12,10 @@ export interface ChatListViewProps {
   selectionId: string | null;
   data: Chat[];
   onSelect?: (id: string) => void;
+  onNewChat?: (provider: string) => void;
 }
 
-export function ChatListView({ className, selectionId, data, onSelect }: ChatListViewProps) {
+export function ChatListView({ className, selectionId, data, onSelect, onNewChat }: ChatListViewProps) {
   const menuProps = {
     items: [
       {
@@ -34,12 +35,15 @@ export function ChatListView({ className, selectionId, data, onSelect }: ChatLis
   const handleItemClick = (id: string) => {
     onSelect && onSelect(id);
   };
+  const handleNewChatButtonClick = async () => {
+    onNewChat && onNewChat('gpt-3.5-turbo');
+  };
   return (
     <div className={cn(styles.container, className)}>
       <header className={styles.header}>
         <h3>Chats</h3>
         <aside className={styles.headerButtons}>
-          <Dropdown.Button className={styles.dropdownButton} menu={menuProps}>
+          <Dropdown.Button className={styles.dropdownButton} menu={menuProps} onClick={handleNewChatButtonClick}>
             New Chat
           </Dropdown.Button>
         </aside>
