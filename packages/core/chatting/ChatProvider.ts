@@ -1,10 +1,17 @@
-import type { Chat } from '../types';
+import type { EventEmitter } from 'eventemitter3';
 
-export interface ChatProvider {
+import type { Chat, Message } from '../types';
+
+export interface ChatProviderEvents {
+  message: (message: Message) => void;
+  partialMessage: (message: Message) => void;
+}
+
+export interface ChatProvider extends EventEmitter<ChatProviderEvents> {
   id: string;
   name: string;
 
   newChat(): Promise<Chat>;
 
-  sendMessage(chatId: string, message: string): Promise<void>;
+  sendMessage(message: Message, history?: Message[]): Promise<void>;
 }
