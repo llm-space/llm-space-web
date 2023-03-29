@@ -18,10 +18,10 @@ export function MessageBox({ className, onSend: onSend }: MessageBoxProps) {
     (e: React.KeyboardEvent) => {
       if (e.key === 'Enter' && !e.shiftKey && !e.altKey && !e.metaKey) {
         e.preventDefault();
-        if (message) {
+        if (message.trim()) {
           setMessage('');
+          onSend?.(message.trim());
         }
-        onSend?.(message.trim());
       }
     },
     [message, onSend]
