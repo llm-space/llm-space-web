@@ -59,7 +59,7 @@ export function ChatListView({ className, selectionId, data, onSelect, onNewChat
             >
               <header>
                 <ProviderLogo provider={chat.provider} />
-                <h4>{chat.subject}</h4>
+                <h4>{chat.subject ? chat.subject : 'New Chat'}</h4>
               </header>
               <div className={styles.lastMessageContent}>{chat.lastMessage?.content}</div>
             </li>

@@ -6,7 +6,7 @@ export abstract class AbstractChat implements Chat {
   readonly messages: Message[] = [];
   lastMessage?: Message;
 
-  constructor(readonly provider: string, readonly id: string, public subject = 'New Chat') {}
+  constructor(readonly provider: string, readonly id: string, public subject = '') {}
 
   abstract sendMessage(message: Message): Promise<void>;
 
