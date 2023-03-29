@@ -7,6 +7,14 @@ export interface ProviderLogoProps {
   provider: string;
 }
 
-export function ProviderLogo({ className }: ProviderLogoProps) {
-  return <div className={cn(styles.container, className)}>GPT</div>;
+export function ProviderLogo({ className, provider }: ProviderLogoProps) {
+  let short = 'N/A';
+  if (provider.startsWith('gpt')) {
+    short = 'GPT';
+  } else if (provider.startsWith('stable-diffusion')) {
+    short = 'SD';
+  } else if (provider.startsWith('belle')) {
+    short = 'BEL';
+  }
+  return <div className={cn(styles.container, className)}>{short}</div>;
 }
