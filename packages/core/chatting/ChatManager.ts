@@ -1,5 +1,6 @@
 import { proxy } from 'valtio';
 
+import { BELLEChatProvider } from './belle';
 import type { Chat } from './Chat';
 import type { ChatProvider } from './ChatProvider';
 import { GPTChatProvider } from './gpt';
@@ -13,6 +14,15 @@ export class ChatManager {
 
   getChat(chatId: string) {
     return this.chats.find((chat) => chat.id === chatId) || null;
+  }
+
+  getProvider(providerId: string) {
+    return this._providerMap.get(providerId) || null;
+  }
+
+  getProviderName(providerId: string) {
+    const provider = this.getProvider(providerId);
+    return provider ? provider.name : null;
   }
 
   getActiveChat() {
@@ -44,3 +54,4 @@ export class ChatManager {
 
 export const chatManager = proxy(new ChatManager());
 chatManager.registerChatProvider(new GPTChatProvider());
+chatManager.registerChatProvider(new BELLEChatProvider());

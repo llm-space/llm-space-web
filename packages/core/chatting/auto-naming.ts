@@ -2,7 +2,7 @@ import type { Chat } from '.';
 
 import type { Message } from '../messaging';
 
-import { chatManager } from './ChatManager';
+import { chatManager } from './';
 
 let namingChat!: Chat;
 
