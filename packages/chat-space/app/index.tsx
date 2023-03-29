@@ -2,9 +2,8 @@ import Split from '@uiw/react-split';
 import { useCallback } from 'react';
 import { useSnapshot } from 'valtio';
 
-import type { Message } from '@/core';
-import { chatManager } from '@/core';
-import type { ChatManager } from '@/core';
+import type { ChatManager, Message } from '@/core';
+import { chatManager, nameChatSubject } from '@/core';
 
 import { ChatDetailView } from '../components/ChatDetailView';
 import { ChatListView } from '../components/ChatListView';
@@ -32,6 +31,10 @@ export function App() {
   const handleSend = useCallback(async (message: Message) => {
     const chat = chatManager.getActiveChat();
     if (chat) {
+      const autoNaming = chat.messages.length === 0 && chat.subject === '';
+      if (autoNaming) {
+        nameChatSubject(chat.id, message);
+      }
       await chat.sendMessage(message);
     }
   }, []);
