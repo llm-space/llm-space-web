@@ -2,6 +2,7 @@
 
 .container {
   display: flex;
+  position: relative;
   height: fit-content;
   background: white;
   border: @border;
@@ -21,4 +22,10 @@
 .textarea {
   height: fit-content;
   min-height: 54px !important;
+}
+
+.prompts {
+  position: absolute;
+  top: -32px;
+  right: 0;
 }

@@ -2,15 +2,18 @@ import { Input } from 'antd';
 import cn from 'classnames';
 import React, { useCallback, useState } from 'react';
 
+import { Prompts } from '../Prompts';
+
 import styles from './index.module.less';
 
 export interface MessageBoxProps {
   className?: string;
+  showPrompts?: boolean;
   onSend?: (message: string) => void;
 }
 
-export function MessageBox({ className, onSend: onSend }: MessageBoxProps) {
-  const [message, setMessage] = useState('南京和北京有哪些区别？用表格输出');
+export function MessageBox({ className, showPrompts, onSend: onSend }: MessageBoxProps) {
+  const [message, setMessage] = useState('');
   const [imeStatus, setImeStatus] = useState(false);
   const handleChange = useCallback((value: string) => {
     setMessage(value);
@@ -37,6 +40,13 @@ export function MessageBox({ className, onSend: onSend }: MessageBoxProps) {
   const handleIMEEnd = useCallback(() => {
     setImeStatus(false);
   }, []);
+  const handlePromptSelect = useCallback(
+    (prompt: string) => {
+      setMessage('');
+      onSend?.(prompt);
+    },
+    [onSend]
+  );
   return (
     <div className={cn(styles.container, className)}>
       <Input.TextArea
@@ -50,6 +60,7 @@ export function MessageBox({ className, onSend: onSend }: MessageBoxProps) {
         onChange={(e) => handleChange(e.target.value)}
         onKeyDown={handleKeyDown}
       />
+      {showPrompts && <Prompts className={styles.prompts} onSelect={handlePromptSelect} />}
     </div>
   );
 }

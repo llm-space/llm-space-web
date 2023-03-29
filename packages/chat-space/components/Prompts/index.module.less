@@ -1,0 +1,27 @@
+@import '@/core/styles/variables.less';
+
+.container {
+  display: flex;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    margin: 0 4px;
+    opacity: 0.66;
+    color: @primary-color;
+    background: white;
+    border: 1px solid @primary-color;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
