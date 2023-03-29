@@ -10,10 +10,14 @@ export class GPTChat extends AbstractChat {
     super('gpt-3.5-turbo', id, subject);
   }
 
+  getMessage(id: string) {
+    return this.messages.find((message) => message.id === id);
+  }
+
   async sendMessage(message: Message) {
     const messagesSnapshot = [...this.messages, message];
     this.appendMessage(message);
-    const res = await fetch(`${BASE_API_URL}/openai/chat/completion`, {
+    const res = await fetch(`${BASE_API_URL}/openai/chat/completion?stream=true`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,16 +26,56 @@ export class GPTChat extends AbstractChat {
         messages: messagesSnapshot,
       }),
     });
-    const content = await res.text();
-    const responseMessage: Message = {
-      id: uuid(),
-      chatId: message.chatId,
-      sender: {
-        role: 'assistant',
-      },
-      contentType: 'text/markdown',
-      content,
-    };
-    this.appendMessage(responseMessage);
+    if (res.body) {
+      let responseMessage: Message = {
+        id: uuid(),
+        chatId: message.chatId,
+        sender: {
+          role: 'assistant',
+        },
+        contentType: 'text/markdown',
+        content: '',
+      };
+      this.appendMessage(responseMessage);
+
+      const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
+      while (true) {
+        const { value, done } = await reader.read();
+        const textValue = value?.toString().replace(/\n\ndata:\s/g, '');
+        const extractedValue = textValue?.substr(6, textValue.length - 6 - 2) ?? '';
+        if (extractedValue && extractedValue !== '[DONE]') {
+          responseMessage = this.getMessage(responseMessage.id) as Message;
+          responseMessage.content += textValue?.substr(6, textValue.length - 6 - 2) ?? '';
+        }
+        if (done) {
+          break;
+        }
+      }
+    }
   }
+
+  // async sendMessage(message: Message) {
+  //   const messagesSnapshot = [...this.messages, message];
+  //   this.appendMessage(message);
+  //   const res = await fetch(`${BASE_API_URL}/openai/chat/completion`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       messages: messagesSnapshot,
+  //     }),
+  //   });
+  //   const content = await res.text();
+  //   const responseMessage: Message = {
+  //     id: uuid(),
+  //     chatId: message.chatId,
+  //     sender: {
+  //       role: 'assistant',
+  //     },
+  //     contentType: 'text/markdown',
+  //     content,
+  //   };
+  //   this.appendMessage(responseMessage);
+  // }
 }

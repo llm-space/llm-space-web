@@ -25,7 +25,7 @@ app.post('/api/openai/chat/completion', async (req, res) => {
     model: 'gpt-3.5-turbo',
     messages: (req.body.messages as Message[]).map(convertMessageToChatCompletionRequestMessage),
   };
-  if (req.query.partial === 'true') {
+  if (req.query.stream === 'true') {
     const partialCompletionRes = await openai.createChatCompletion(
       {
         ...completionReq,
