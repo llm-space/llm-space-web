@@ -1,5 +1,6 @@
 import { Dropdown } from 'antd';
 import cn from 'classnames';
+import { useMemo } from 'react';
 
 import type { Chat } from '@/core';
 
@@ -16,22 +17,25 @@ export interface ChatListViewProps {
 }
 
 export function ChatListView({ className, selectionId, data, onSelect, onNewChat }: ChatListViewProps) {
-  const menuProps = {
-    items: [
-      {
-        key: 'gpt-3.5-turbo',
-        label: 'GPT-3.5 Turbo',
-      },
-      {
-        key: 'belle-7b-gptq',
-        label: 'BELLE 7B GPTQ',
-      },
-      {
-        key: 'stable-diffusion-2.1',
-        label: 'Stable Diffusion 2.1',
-      },
-    ],
-  };
+  const menuProps = useMemo(
+    () => ({
+      items: [
+        {
+          key: 'gpt-3.5-turbo',
+          label: 'GPT-3.5 Turbo',
+        },
+        {
+          key: 'belle-7b-gptq',
+          label: 'BELLE 7B GPTQ',
+        },
+        {
+          key: 'stable-diffusion-2.1',
+          label: 'Stable Diffusion 2.1',
+        },
+      ],
+    }),
+    []
+  );
   const handleItemClick = (id: string) => {
     onSelect?.(id);
   };

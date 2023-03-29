@@ -1,19 +1,17 @@
 import Split from '@uiw/react-split';
 import { useCallback } from 'react';
-import { proxy, useSnapshot } from 'valtio';
+import { useSnapshot } from 'valtio';
 
 import type { Message } from '@/core';
-import { ChatManager } from '@/core';
-import { GPTChatProvider } from '@/core/chatting/gpt';
+import { chatManager } from '@/core';
+import type { ChatManager } from '@/core';
 
 import { ChatDetailView } from '../components/ChatDetailView';
 import { ChatListView } from '../components/ChatListView';
 
 import styles from './index.module.less';
 
-const chatManager = proxy(new ChatManager());
 async function setup() {
-  chatManager.registerChatProvider(new GPTChatProvider());
   const chat = await chatManager.newChat('gpt-3.5-turbo');
   chatManager.addChat(chat);
   chatManager.activateChat(chat.id);
