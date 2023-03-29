@@ -2,9 +2,11 @@ import type { Chat } from './Chat';
 import type { ChatProvider } from './ChatProvider';
 
 export class ChatManager {
-  readonly providers = new Map<string, ChatProvider>();
   readonly chats: Chat[] = [];
+  readonly providers: ChatProvider[] = [];
   activeChatId: string | null = null;
+
+  private readonly _providerMap = new Map<string, ChatProvider>();
 
   getChat(chatId: string) {
     return this.chats.find((chat) => chat.id === chatId) || null;
@@ -15,7 +17,7 @@ export class ChatManager {
   }
 
   async newChat(provider: string): Promise<Chat> {
-    const chatProvider = this.providers.get(provider);
+    const chatProvider = this._providerMap.get(provider);
     if (!chatProvider) {
       throw new Error(`No chat provider registered with id ${provider}`);
     }
@@ -32,6 +34,7 @@ export class ChatManager {
   }
 
   registerChatProvider(provider: ChatProvider) {
-    this.providers.set(provider.id, provider);
+    this.providers.push(provider);
+    this._providerMap.set(provider.id, provider);
   }
 }
