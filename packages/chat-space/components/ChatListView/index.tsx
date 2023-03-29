@@ -33,10 +33,10 @@ export function ChatListView({ className, selectionId, data, onSelect, onNewChat
     ],
   };
   const handleItemClick = (id: string) => {
-    onSelect && onSelect(id);
+    onSelect?.(id);
   };
   const handleNewChatButtonClick = async () => {
-    onNewChat && onNewChat('gpt-3.5-turbo');
+    onNewChat?.('gpt-3.5-turbo');
   };
   return (
     <div className={cn(styles.container, className)}>

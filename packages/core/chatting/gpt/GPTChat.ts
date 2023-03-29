@@ -12,7 +12,7 @@ export class GPTChat extends AbstractChat {
 
   async sendMessage(message: Message) {
     const messagesSnapshot = [...this.messages, message];
-    this.messages.push(message);
+    this.appendMessage(message);
     const res = await fetch(`${BASE_API_URL}/openai/chat/completion`, {
       method: 'POST',
       headers: {
@@ -32,6 +32,6 @@ export class GPTChat extends AbstractChat {
       contentType: 'text/markdown',
       content,
     };
-    this.messages.push(responseMessage);
+    this.appendMessage(responseMessage);
   }
 }

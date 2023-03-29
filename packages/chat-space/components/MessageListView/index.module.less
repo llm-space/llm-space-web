@@ -15,7 +15,7 @@
   width: 100%;
   height: 100%;
   padding: 0;
-  margin: 0;
+  margin: 0 0 32px 0;
 }
 
 .bubble {
@@ -24,7 +24,6 @@
   width: fit-content;
   min-width: 42px;
   max-width: 680px;
-  min-height: 50px;
   padding: 12px;
   margin: 6px 0;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 0.3px 0.9px 0px, rgba(0, 0, 0, 0.16) 0px 1.6px 3.6px 0px;
@@ -46,5 +45,11 @@
     background: @primary-color;
     border: @primary-color;
     border-radius: 8px 0 8px 8px;
+  }
+}
+
+.markdown {
+  p {
+    margin: 0;
   }
 }

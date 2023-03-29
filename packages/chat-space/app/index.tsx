@@ -2,6 +2,7 @@ import Split from '@uiw/react-split';
 import { useCallback } from 'react';
 import { proxy, useSnapshot } from 'valtio';
 
+import type { Message } from '@/core';
 import { ChatManager } from '@/core';
 import { GPTChatProvider } from '@/core/chatting/gpt';
 
@@ -24,6 +25,12 @@ export function App() {
     chatManager.activateChat(chat.id);
     // TODO: scroll to top
   }, []);
+  const handleSend = useCallback(async (message: Message) => {
+    const chat = chatManager.getActiveChat();
+    if (chat) {
+      await chat.sendMessage(message);
+    }
+  }, []);
   const activeChat = snapshot.getActiveChat();
   return (
     <Split className={styles.container} lineBar>
@@ -35,7 +42,9 @@ export function App() {
           onNewChat={handleNewChat}
         />
       </nav>
-      <main className={styles.chatDetailContainer}>{activeChat && <ChatDetailView data={activeChat} />}</main>
+      <main className={styles.chatDetailContainer}>
+        {activeChat && <ChatDetailView data={activeChat} onSend={handleSend} />}
+      </main>
       <aside className={styles.chatSettingsContainer}></aside>
     </Split>
   );

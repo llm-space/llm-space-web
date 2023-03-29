@@ -44,8 +44,7 @@ app.post('/api/openai/chat/completion', async (req, res) => {
         .map((l) => l.trim().split('data: ')[1]);
       chunks.forEach((chunk) => {
         if (chunk === '[DONE]') {
-          res.write('data: [DONE]\n\n');
-          res.end();
+          res.end('data: [DONE]\n\n');
         } else {
           const json = JSON.parse(chunk);
           if (json.choices[0].delta.content) {
@@ -60,7 +59,7 @@ app.post('/api/openai/chat/completion', async (req, res) => {
     const completionRes = await openai.createChatCompletion({
       ...completionReq,
     });
-    res.json(completionRes.data.choices[0].message?.content);
+    res.end(completionRes.data.choices[0].message?.content);
   }
 });
 
