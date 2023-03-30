@@ -53,5 +53,5 @@ export class ChatManager {
 }
 
 export const chatManager = proxy(new ChatManager());
-chatManager.registerChatProvider(new BELLEChatProvider());
 chatManager.registerChatProvider(new GPTChatProvider());
+chatManager.registerChatProvider(new BELLEChatProvider());
