@@ -2,7 +2,7 @@ import cn from 'classnames';
 
 import type { Message } from '@/core';
 
-import { MessageContent } from './MessageContent';
+import { MessageContent } from '../MessageContent';
 
 import styles from './index.module.less';
 
