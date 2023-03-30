@@ -1,5 +1,6 @@
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
+import 'dotenv/config';
 import * as express from 'express';
 import type {
   ChatCompletionRequestMessage,
