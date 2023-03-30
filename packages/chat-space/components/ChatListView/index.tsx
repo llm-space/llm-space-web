@@ -1,7 +1,6 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Button, Tooltip } from 'antd';
-import { Dropdown } from 'antd';
+import { Button, Dropdown, Empty, Tooltip } from 'antd';
 import cn from 'classnames';
 import { useCallback, useMemo, useState } from 'react';
 
@@ -77,32 +76,38 @@ export function ChatListView({
       </header>
       <main className={styles.main}>
         <ul className={styles.list}>
-          {data.map((chat) => (
-            <li
-              key={chat.id}
-              id={chat.id}
-              className={cn('llm-space-chat-list-item', styles.chat, { [styles.selected]: selectionId === chat.id })}
-              onClick={() => handleItemClick(chat.id)}
-            >
-              <header>
-                <ProviderIcon provider={chat.provider} />
-                <h4>{chat.subject ? chat.subject : 'New Chat'}</h4>
-              </header>
-              <div className={styles.lastMessageContent}>{chat.lastMessage?.content}</div>
-              <Tooltip title="Remove chat">
-                <Button
-                  className={styles.removeButton}
-                  icon={<DeleteOutlined />}
-                  shape="circle"
-                  type="text"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleRemove(chat.id);
-                  }}
-                ></Button>
-              </Tooltip>
-            </li>
-          ))}
+          {data.length > 0 ? (
+            data.map((chat) => (
+              <li
+                key={chat.id}
+                id={chat.id}
+                className={cn('llm-space-chat-list-item', styles.chat, {
+                  [styles.selected]: selectionId === chat.id,
+                })}
+                onClick={() => handleItemClick(chat.id)}
+              >
+                <header>
+                  <ProviderIcon provider={chat.provider} />
+                  <h4>{chat.subject ? chat.subject : 'New Chat'}</h4>
+                </header>
+                <div className={styles.lastMessageContent}>{chat.lastMessage?.content ?? 'No message'}</div>
+                <Tooltip title="Remove chat">
+                  <Button
+                    className={styles.removeButton}
+                    icon={<DeleteOutlined />}
+                    shape="circle"
+                    type="text"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemove(chat.id);
+                    }}
+                  />
+                </Tooltip>
+              </li>
+            ))
+          ) : (
+            <Empty description="No more chat left" style={{ marginTop: 16 }} />
+          )}
         </ul>
       </main>
     </div>
