@@ -5,7 +5,7 @@ import type { Chat, SendMessageOptions } from './Chat';
 
 export abstract class AbstractChat implements Chat {
   readonly messages: Message[] = [];
-  baseServiceURL?: string;
+  baseServiceURL = '';
   lastMessage: Message | null = null;
 
   constructor(readonly provider: string, readonly id: string, public subject = '') {}

@@ -3,11 +3,7 @@ import { uuid } from '../../utils';
 import { AbstractChat } from '../AbstractChat';
 import type { SendMessageOptions } from '../Chat';
 
-const DEFAULT_BASE_API_URL = '//localhost:3000';
-
 export class GPTChat extends AbstractChat {
-  baseServiceURL: string = DEFAULT_BASE_API_URL;
-
   constructor(readonly id: string, subject?: string) {
     super('gpt-3.5-turbo', id, subject);
   }

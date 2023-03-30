@@ -3,11 +3,7 @@ import { uuid } from '@/core/utils';
 import type { Message } from '../../messaging';
 import { AbstractChat } from '../AbstractChat';
 
-const DEFAULT_BASE_API_URL = 'https://0c59-35-237-236-185.ngrok.io';
-
 export class BELLEChat extends AbstractChat {
-  baseServiceURL = DEFAULT_BASE_API_URL;
-
   constructor(readonly id: string, subject?: string) {
     super('belle-gptq', id, subject);
   }

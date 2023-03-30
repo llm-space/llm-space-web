@@ -7,6 +7,7 @@ export interface SendMessageOptions {
 export interface Chat {
   id: string;
   provider: string;
+  baseServiceURL: string;
   subject: string;
   messages: Message[];
   lastMessage: Message | null;

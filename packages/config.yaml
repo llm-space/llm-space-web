@@ -1,6 +1,5 @@
 chatspace:
   providers:
     - id: gpt-3.5-turbo
-      baseServiceURL: http://localhost:3000
     - id: belle-gpt
       baseServiceURL: https://0c59-35-237-236-185.ngrok.io
