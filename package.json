@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=development ts-node packages/node-server/index.ts",
     "build": "vite build",
-    "start": "npm run dev",
+    "start": "NODE_ENV=production ts-node packages/node-server/index.ts",
     "start:node": "ts-node packages/node-server/index.ts"
   },
   "keywords": [],

@@ -18,6 +18,8 @@ app.use(cors());
 app.use(bodyParser.json());
 if (devMode) {
   setupViteDevServer();
+} else {
+  app.use(express.static('dist'));
 }
 
 if (!process.env.OPENAI_API_KEY) {
