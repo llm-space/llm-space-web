@@ -9,7 +9,7 @@ export interface Chat {
   provider: string;
   subject: string;
   messages: Message[];
-  lastMessage?: Message;
+  lastMessage: Message | null;
 
   createUserMessage(content: string, contentType?: string): Message;
   sendMessage(message: Message, options?: SendMessageOptions): Promise<void>;

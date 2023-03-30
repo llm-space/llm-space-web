@@ -6,7 +6,7 @@ import type { Chat, SendMessageOptions } from './Chat';
 
 export abstract class AbstractChat implements Chat {
   readonly messages: Message[] = [];
-  lastMessage?: Message;
+  lastMessage: Message | null = null;
 
   constructor(readonly provider: string, readonly id: string, public subject = '') {}
 
@@ -27,6 +27,7 @@ export abstract class AbstractChat implements Chat {
 
   clearMessages() {
     this.messages.splice(0, this.messages.length);
+    this.lastMessage = null;
   }
 
   protected appendMessage(message: Message) {
