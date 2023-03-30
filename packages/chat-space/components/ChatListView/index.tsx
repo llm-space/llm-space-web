@@ -3,7 +3,7 @@ import type { MenuProps } from 'antd';
 import { Button, Tooltip } from 'antd';
 import { Dropdown } from 'antd';
 import cn from 'classnames';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import type { Chat } from '@/core';
 import { chatManager } from '@/core';
@@ -45,15 +45,21 @@ export function ChatListView({
     }),
     [onNew]
   );
-  const handleItemClick = (id: string) => {
-    onSelect?.(id);
-  };
-  const handleNew = async () => {
+  const handleItemClick = useCallback(
+    (id: string) => {
+      onSelect?.(id);
+    },
+    [onSelect]
+  );
+  const handleNew = useCallback(async () => {
     onNew?.(defaultProvider);
-  };
-  const handleRemove = (id: string) => {
-    onDelete?.(id);
-  };
+  }, [defaultProvider, onNew]);
+  const handleRemove = useCallback(
+    (id: string) => {
+      onDelete?.(id);
+    },
+    [onDelete]
+  );
   return (
     <div className={cn(styles.container, className)}>
       <header className={styles.header}>
