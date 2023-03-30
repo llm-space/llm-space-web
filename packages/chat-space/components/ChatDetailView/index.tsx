@@ -1,4 +1,4 @@
-import { ClearOutlined, SettingOutlined } from '@ant-design/icons';
+import { ClearOutlined, ToolOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import cn from 'classnames';
 import { useCallback } from 'react';
@@ -68,7 +68,7 @@ function ChatDetailHeader({ data, onClear }: ChatDetailViewProps) {
           <Button icon={<ClearOutlined />} onClick={onClear} />
         </Tooltip>
         <Tooltip title="Settings">
-          <Button icon={<SettingOutlined />} />
+          <Button icon={<ToolOutlined />} />
         </Tooltip>
       </aside>
     </div>
