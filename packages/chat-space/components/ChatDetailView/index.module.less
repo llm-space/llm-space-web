@@ -25,12 +25,30 @@
 
   .provider {
     color: @secondary-text-color;
+    font-size: smaller;
   }
 }
 
 .detailHeader {
   display: flex;
+  width: 100%;
   align-items: center;
+}
+
+.detailHeaderMain {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.detailHeaderRight {
+  display: flex;
+  justify-content: right;
+  flex-grow: 1;
+
+  button {
+    margin-left: 4px;
+  }
 }
 
 .detailInfo {

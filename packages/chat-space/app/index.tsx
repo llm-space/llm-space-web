@@ -28,6 +28,12 @@ export function App() {
     chatManager.activateChat(chat.id);
     // TODO: scroll to top
   }, []);
+  const handleClearChat = useCallback(async () => {
+    const chat = chatManager.getActiveChat();
+    if (chat) {
+      chat.clearMessages();
+    }
+  }, []);
   const handleSend = useCallback(async (message: Message) => {
     const chat = chatManager.getActiveChat();
     if (chat) {
@@ -50,7 +56,7 @@ export function App() {
         />
       </nav>
       <main className={styles.chatDetailContainer}>
-        {activeChat && <ChatDetailView data={activeChat} onSend={handleSend} />}
+        {activeChat && <ChatDetailView data={activeChat} onSend={handleSend} onClear={handleClearChat} />}
       </main>
       <aside className={styles.chatSettingsContainer}></aside>
     </Split>

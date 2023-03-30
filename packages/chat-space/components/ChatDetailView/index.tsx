@@ -1,3 +1,5 @@
+import { ClearOutlined, SettingOutlined } from '@ant-design/icons';
+import { Button, Tooltip } from 'antd';
 import cn from 'classnames';
 import { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -15,9 +17,10 @@ export interface ChatDetailViewProps {
   className?: string;
   data: Chat;
   onSend?: (message: Message) => void;
+  onClear?: () => void;
 }
 
-export function ChatDetailView({ className, data, onSend }: ChatDetailViewProps) {
+export function ChatDetailView({ className, data, onSend, onClear }: ChatDetailViewProps) {
   const handleSendMessage = useCallback(
     (message: string) => {
       onSend?.({
@@ -35,7 +38,7 @@ export function ChatDetailView({ className, data, onSend }: ChatDetailViewProps)
   return (
     <div className={cn(styles.container, className)}>
       <header className={styles.header}>
-        <ChatDetailHeader data={data} />
+        <ChatDetailHeader data={data} onClear={onClear} />
       </header>
       <main className={styles.main}>
         <MessageListView className={styles.messageList} data={data.messages} />
@@ -50,14 +53,24 @@ export function ChatDetailView({ className, data, onSend }: ChatDetailViewProps)
   );
 }
 
-function ChatDetailHeader({ data }: ChatDetailViewProps) {
+function ChatDetailHeader({ data, onClear }: ChatDetailViewProps) {
   return (
     <div className={styles.detailHeader}>
-      <ProviderIcon size="large" provider={data.provider} />
-      <div className={styles.detailInfo}>
-        <h3>{data.subject ? data.subject : 'New Chat'}</h3>
-        <div className={styles.provider}>{chatManager.getProviderName(data.provider)}</div>
-      </div>
+      <main className={styles.detailHeaderMain}>
+        <ProviderIcon size="large" provider={data.provider} />
+        <div className={styles.detailInfo}>
+          <h3>{data.subject ? data.subject : 'New Chat'}</h3>
+          <div className={styles.provider}>{chatManager.getProviderName(data.provider)}</div>
+        </div>
+      </main>
+      <aside className={styles.detailHeaderRight}>
+        <Tooltip title="Clear messages">
+          <Button icon={<ClearOutlined />} onClick={onClear} />
+        </Tooltip>
+        <Tooltip title="Settings">
+          <Button icon={<SettingOutlined />} />
+        </Tooltip>
+      </aside>
     </div>
   );
 }
