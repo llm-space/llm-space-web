@@ -3,3 +3,44 @@ chatspace:
     - id: gpt-3.5-turbo
     - id: belle-gpt
       baseServiceURL: https://0c59-35-237-236-185.ngrok.io
+  prompts:
+    - AI's role in art?
+    - Top 5 programming languages?
+    - Most famous paintings?
+    - Quantum computing basics?
+    - Dark matter explained?
+    - Key moments in history?
+    - Evolution of music genres?
+    - Nanotechnology applications?
+    - Classic literature must-reads?
+    - Famous philosophy theories?
+    - AI ethics concerns?
+    - Most influential scientists?
+    - The human brain structure?
+    - Climate change solutions?
+    - Solar energy pros and cons?
+    - Ancient civilizations' impact?
+    - Space exploration milestones?
+    - Virtual reality in education?
+    - Genetic engineering risks?
+    - World's major religions?
+    - Top 5 cryptocurrencies?
+    - Mars colonization progress?
+    - Art movements in history?
+    - Machine learning basics?
+    - Earth's geological eras?
+    - Best foreign language to learn?
+    - Top 5 world cuisines?
+    - Wildlife conservation methods?
+    - Neuroscience breakthroughs?
+    - Memorable historical speeches?
+    - Great composers' influence?
+    - Renewable energy types?
+    - Human body's systems?
+    - Cultural differences globally?
+    - The future of work?
+    - Ocean pollution solutions?
+    - Scientific method explained?
+    - String theory simplified?
+    - Most impactful inventions?
+    - Famous architectural styles?
