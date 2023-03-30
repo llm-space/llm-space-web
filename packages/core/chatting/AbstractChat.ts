@@ -1,6 +1,5 @@
-import { v4 as uuid } from 'uuid';
-
 import type { Message, MessageContentType } from '../messaging';
+import { uuid } from '../utils';
 
 import type { Chat, SendMessageOptions } from './Chat';
 
