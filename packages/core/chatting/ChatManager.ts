@@ -1,7 +1,9 @@
 import { proxy } from 'valtio';
 
-import type { Chat } from './Chat';
+import type { Chat, ChatLike } from './Chat';
 import type { ChatProvider } from './ChatProvider';
+
+const CHATS_STORAGE_KEY = 'llmspace.chatting.chats';
 
 export class ChatManager {
   readonly chats: Chat[] = [];
@@ -9,6 +11,24 @@ export class ChatManager {
   activeChatId: string | null = null;
 
   private readonly _providerMap = new Map<string, ChatProvider>();
+
+  async loadFromLocalStorage() {
+    const raw = localStorage.getItem(CHATS_STORAGE_KEY);
+    if (raw) {
+      const chatsJSON = JSON.parse(raw) as ChatLike[];
+      for (const chatJSON of chatsJSON) {
+        const provider = this.getProvider(chatJSON.provider);
+        if (provider) {
+          const chat = await provider.loadChat(chatJSON);
+          this.chats.push(chat);
+        }
+      }
+    }
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem(CHATS_STORAGE_KEY, JSON.stringify(this.chats));
+  }
 
   getChat(chatId: string) {
     return this.chats.find((chat) => chat.id === chatId) || null;
@@ -42,6 +62,7 @@ export class ChatManager {
 
   addChat(chat: Chat) {
     this.chats.unshift(chat);
+    this.saveToLocalStorage();
   }
 
   removeChat(chatId: string) {
@@ -53,6 +74,7 @@ export class ChatManager {
     if (index >= 0) {
       this.chats.splice(index, 1);
     }
+    this.saveToLocalStorage();
   }
 
   registerChatProvider(provider: ChatProvider) {

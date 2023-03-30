@@ -2,6 +2,7 @@ import { uuid } from '@/core/utils';
 
 import type { Message } from '../../messaging';
 import { AbstractChat } from '../AbstractChat';
+import { chatManager } from '../ChatManager';
 
 export class BELLEChat extends AbstractChat {
   constructor(readonly id: string, subject?: string) {
@@ -39,5 +40,6 @@ export class BELLEChat extends AbstractChat {
     if (responseMessage) {
       responseMessage.content = content;
     }
+    chatManager.saveToLocalStorage();
   }
 }

@@ -2,6 +2,7 @@ import type { Message } from '../../messaging';
 import { uuid } from '../../utils';
 import { AbstractChat } from '../AbstractChat';
 import type { SendMessageOptions } from '../Chat';
+import { chatManager } from '../ChatManager';
 
 export class GPTChat extends AbstractChat {
   constructor(readonly id: string, subject?: string) {
@@ -55,5 +56,6 @@ export class GPTChat extends AbstractChat {
         }
       }
     }
+    chatManager.saveToLocalStorage();
   }
 }

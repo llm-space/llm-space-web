@@ -1,4 +1,4 @@
-import type { Chat } from './Chat';
+import type { Chat, ChatLike } from './Chat';
 
 export interface ChatProvider {
   id: string;
@@ -6,4 +6,6 @@ export interface ChatProvider {
   baseServiceURL: string;
 
   newChat(subject?: string): Promise<Chat>;
+
+  loadChat(chat: ChatLike): Promise<Chat>;
 }
