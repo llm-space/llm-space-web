@@ -19,15 +19,30 @@ setup();
 
 export function App() {
   const snapshot = useSnapshot(chatManager) as ChatManager;
+  const scrollIntoView = useCallback((id: string) => {
+    setTimeout(() => {
+      if (id) {
+        const e = document.querySelector(`.llm-space-chat-list-item#${id}`) as HTMLElement;
+        if (e) {
+          e.scrollIntoView({
+            behavior: 'smooth',
+          });
+        }
+      }
+    }, 0);
+  }, []);
   const handleChatListViewSelect = useCallback((id: string) => {
     chatManager.activateChat(id);
   }, []);
-  const handleNewChat = useCallback(async (provider: string) => {
-    const chat = await chatManager.newChat(provider);
-    chatManager.addChat(chat);
-    chatManager.activateChat(chat.id);
-    // TODO: scroll to top
-  }, []);
+  const handleNewChat = useCallback(
+    async (provider: string) => {
+      const chat = await chatManager.newChat(provider);
+      chatManager.addChat(chat);
+      chatManager.activateChat(chat.id);
+      scrollIntoView(chat.id);
+    },
+    [scrollIntoView]
+  );
   const handleRemoveChat = useCallback(async (chatId: string) => {
     const chat = chatManager.getChat(chatId);
     if (chat) {
@@ -45,7 +60,6 @@ export function App() {
           }
         }, 0);
       }
-      // TODO: scroll to top
     }
   }, []);
   const handleClearChat = useCallback(async () => {

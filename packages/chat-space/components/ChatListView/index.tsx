@@ -74,7 +74,8 @@ export function ChatListView({
           {data.map((chat) => (
             <li
               key={chat.id}
-              className={cn(styles.chat, { [styles.selected]: selectionId === chat.id })}
+              id={chat.id}
+              className={cn('llm-space-chat-list-item', styles.chat, { [styles.selected]: selectionId === chat.id })}
               onClick={() => handleItemClick(chat.id)}
             >
               <header>
