@@ -1,5 +1,7 @@
 # llm-space: Large Language Models Space
 
+![Demo Recording](docs/images/screen-recording.gif)
+
 An enterprise-level web UI for Large Language Models.
 
 ## Installation
