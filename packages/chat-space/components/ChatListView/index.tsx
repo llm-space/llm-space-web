@@ -43,7 +43,7 @@ export function ChatListView({ className, selectionId, data, onSelect, onNewChat
     <div className={cn(styles.container, className)}>
       <header className={styles.header}>
         <h3>Chats</h3>
-        <aside className={styles.headerButtons}>
+        <aside className={styles.right}>
           <Dropdown.Button className={styles.dropdownButton} menu={menuProps} onClick={handleNewChatButtonClick}>
             New Chat
           </Dropdown.Button>
