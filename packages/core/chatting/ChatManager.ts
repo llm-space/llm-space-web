@@ -46,6 +46,17 @@ export class ChatManager {
     this.chats.unshift(chat);
   }
 
+  removeChat(chatId: string) {
+    const chat = this.getChat(chatId);
+    if (!chat) {
+      return;
+    }
+    const index = this.chats.indexOf(chat);
+    if (index >= 0) {
+      this.chats.splice(index, 1);
+    }
+  }
+
   registerChatProvider(provider: ChatProvider) {
     this.providers.push(provider);
     this._providerMap.set(provider.id, provider);
