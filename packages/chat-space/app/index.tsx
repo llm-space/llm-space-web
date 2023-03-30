@@ -28,6 +28,26 @@ export function App() {
     chatManager.activateChat(chat.id);
     // TODO: scroll to top
   }, []);
+  const handleRemoveChat = useCallback(async (chatId: string) => {
+    const chat = chatManager.getChat(chatId);
+    if (chat) {
+      const active = chatManager.activeChatId === chatId;
+      const chatIndex = chatManager.chats.indexOf(chat);
+      chatManager.removeChat(chatId);
+      if (active) {
+        setTimeout(() => {
+          if (chatManager.chats.length > 0) {
+            let nextChat = chatManager.chats[chatIndex];
+            if (!nextChat) {
+              nextChat = chatManager.chats[chatIndex - 1];
+            }
+            chatManager.activateChat(nextChat.id);
+          }
+        }, 0);
+      }
+      // TODO: scroll to top
+    }
+  }, []);
   const handleClearChat = useCallback(async () => {
     const chat = chatManager.getActiveChat();
     if (chat) {
@@ -51,8 +71,10 @@ export function App() {
         <ChatListView
           selectionId={snapshot.activeChatId}
           data={snapshot.chats}
+          highlightNewChatButton={snapshot.chats.length === 0}
           onSelect={handleChatListViewSelect}
-          onNewChat={handleNewChat}
+          onNew={handleNewChat}
+          onRemove={handleRemoveChat}
         />
       </nav>
       <main className={styles.chatDetailContainer}>
