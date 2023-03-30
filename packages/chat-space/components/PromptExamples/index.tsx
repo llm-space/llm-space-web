@@ -12,7 +12,7 @@ export interface PromptExamplesProps {
 
 export function PromptExamples({ className, chatId, onSelect }: PromptExamplesProps) {
   const randomPrompts = useMemo(
-    () => config.chatspace.prompts.sort(() => Math.random() - 0.5).slice(0, 3),
+    () => config.chatting.prompts.sort(() => Math.random() - 0.5).slice(0, 3),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [chatId]
   );

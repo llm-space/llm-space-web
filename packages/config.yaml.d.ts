@@ -1,5 +1,5 @@
 declare module '@/config.yaml' {
-  export const chatspace: {
+  export const chatting: {
     providers: { id: string; baseServiceURL?: string }[];
     prompts: string[];
   };

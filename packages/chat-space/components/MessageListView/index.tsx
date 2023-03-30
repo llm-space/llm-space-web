@@ -19,7 +19,7 @@ export function MessageListView({ className, data }: MessageListViewProps) {
       const lastMessage = data[data.length - 1];
       if ((lastMessage.sender.role === 'assistant' && autoScroll) || lastMessage.sender.role === 'user') {
         setAutoScroll(true);
-        const element = document.querySelector(`.llm-space-chat-message-bubble#${lastMessage.id}`);
+        const element = document.querySelector(`.llmspace-chat-message-bubble#${lastMessage.id}`);
         setTimeout(() => {
           if (element) {
             element.scrollIntoView({
@@ -47,7 +47,7 @@ export function MessageListView({ className, data }: MessageListViewProps) {
           <li
             key={message.id}
             id={message.id}
-            className={cn('llm-space-chat-message-bubble', styles.bubble, {
+            className={cn('llmspace-chat-message-bubble', styles.bubble, {
               [styles.incoming]: message.sender.role === 'assistant',
               [styles.outgoing]: message.sender.role === 'user',
             })}

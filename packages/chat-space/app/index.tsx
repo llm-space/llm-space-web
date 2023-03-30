@@ -26,7 +26,7 @@ export function App() {
   const scrollIntoView = useCallback((id: string) => {
     setTimeout(() => {
       if (id) {
-        const e = document.querySelector(`.llm-space-chat-list-item#${id}`) as HTMLElement;
+        const e = document.querySelector(`.llmspace-chat-list-item#${id}`) as HTMLElement;
         if (e) {
           e.scrollIntoView({
             behavior: 'smooth',
