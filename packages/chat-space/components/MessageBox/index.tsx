@@ -4,7 +4,7 @@ import React, { useCallback, useState } from 'react';
 
 import type { Chat } from '@/core';
 
-import { Prompts } from '../Prompts';
+import { PromptExamples } from '../PromptExamples';
 
 import styles from './index.module.less';
 
@@ -65,7 +65,7 @@ export function MessageBox({ className, chat, showPrompts, onSend: onSend }: Mes
           onKeyDown={handleKeyDown}
         />
       </main>
-      {showPrompts && <Prompts chatId={chat.id} className={styles.prompts} onSelect={handlePromptSelect} />}
+      {showPrompts && <PromptExamples chatId={chat.id} className={styles.prompts} onSelect={handlePromptSelect} />}
     </div>
   );
 }

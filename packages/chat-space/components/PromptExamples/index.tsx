@@ -26,13 +26,13 @@ const PROMPTS = [
   '宇宙是否有边界',
 ];
 
-export interface PromptsProps {
+export interface PromptExamplesProps {
   className?: string;
   chatId: string;
   onSelect?: (prompt: string) => void;
 }
 
-export function Prompts({ className, chatId, onSelect }: PromptsProps) {
+export function PromptExamples({ className, chatId, onSelect }: PromptExamplesProps) {
   const randomPrompts = useMemo(
     () => ['南京和北京有哪些区别？用表格输出', ...PROMPTS.sort(() => Math.random() - 0.5).slice(0, 3)],
     // eslint-disable-next-line react-hooks/exhaustive-deps
