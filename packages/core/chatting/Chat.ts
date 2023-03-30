@@ -4,12 +4,15 @@ export interface SendMessageOptions {
   streamResponseCallback: (message: Message) => void;
 }
 
-export interface Chat {
+export interface ChatLike {
   id: string;
   provider: string;
   baseServiceURL: string;
   subject: string;
   messages: Message[];
+}
+
+export interface Chat extends ChatLike {
   lastMessage: Message | null;
 
   createUserMessage(content: string, contentType?: string): Message;
