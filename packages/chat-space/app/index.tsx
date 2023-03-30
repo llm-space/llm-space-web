@@ -1,5 +1,5 @@
 import Split from '@uiw/react-split';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 
 import type { ChatManager, Message } from '@/core';
@@ -10,17 +10,19 @@ import { ChatListView } from '../components/ChatListView';
 
 import styles from './index.module.less';
 
-async function setup() {
-  if (chatManager.chats.length === 0) {
-    const chat = await chatManager.newChat(chatManager.providers[0].id);
-    chatManager.addChat(chat);
-  }
-  chatManager.activateChat(chatManager.chats[0].id);
-}
-setup();
-
 export function App() {
   const snapshot = useSnapshot(chatManager) as ChatManager;
+  useEffect(() => {
+    if (chatManager.chats.length === 0) {
+      chatManager.newChat(chatManager.providers[0].id).then((newChat) => {
+        chatManager.addChat(newChat);
+        chatManager.activateChat(newChat.id);
+      });
+    } else {
+      const chat = chatManager.chats[0];
+      chatManager.activateChat(chat.id);
+    }
+  }, []);
   const scrollIntoView = useCallback((id: string) => {
     setTimeout(() => {
       if (id) {
