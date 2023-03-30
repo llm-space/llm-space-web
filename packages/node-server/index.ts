@@ -7,18 +7,41 @@ import type {
   CreateChatCompletionRequest,
 } from 'openai';
 import { Configuration, OpenAIApi } from 'openai';
+import { createServer } from 'vite';
 
 import type { Message } from '@/core';
+
+const devMode = process.env.NODE_ENV === 'development';
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+if (devMode) {
+  setupViteDevServer();
+}
+
+if (!process.env.OPENAI_API_KEY) {
+  console.info('ERROR: Missing OPENAI_API_KEY environment variable.');
+  console.info('In the root folder of this project, please add a ".env" file as shown below, and restart the server.');
+  console.info('\n\nOPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n');
+  process.exit(1);
+}
 
 const openai = new OpenAIApi(
   new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   })
 );
+
+async function setupViteDevServer() {
+  console.info('Running in DEV mode.');
+  const viteDevServer = await createServer({
+    server: { middlewareMode: true },
+    root: process.cwd(),
+    configFile: './vite.config.ts',
+  });
+  app.use(viteDevServer.middlewares);
+}
 
 app.post('/api/openai/chat/completion', async (req, res) => {
   const completionReq: CreateChatCompletionRequest = {

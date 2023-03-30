@@ -4,7 +4,7 @@
   "description": "An enterprise-level web UI for Large Language Models.",
   "main": "index.js",
   "scripts": {
-    "dev": "vite",
+    "dev": "NODE_ENV=development ts-node packages/node-server/index.ts",
     "build": "vite build",
     "start": "npm run dev",
     "start:node": "ts-node packages/node-server/index.ts"
