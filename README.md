@@ -12,13 +12,19 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 > Note: You can get your own API key from [OpenAI](https://platform.openai.com/account/api-keys/).
 
-2. Install dependencies:
+2. **IMPORTANT:** Copy `packages/config.example.yaml` to `packages/config.yaml` and edit it as your needs.
+
+```bash
+cp packages/config.example.yaml packages/config.yaml
+```
+
+3. Install dependencies:
 
 ```bash
 npm install
 ```
 
-3. Start server:
+4. Start server:
 
 Run in production mode:
 
