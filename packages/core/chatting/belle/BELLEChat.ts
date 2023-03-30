@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import type { Message } from '../../messaging';
 import { AbstractChat } from '../AbstractChat';
 
-const BASE_API_URL = '//localhost:3000/api';
+const BASE_API_URL = 'https://0c59-35-237-236-185.ngrok.io';
 
 export class BELLEChat extends AbstractChat {
   constructor(readonly id: string, subject?: string) {
@@ -27,7 +27,7 @@ export class BELLEChat extends AbstractChat {
       content: '',
     };
     this.appendMessage(responseMessage);
-    const res = await fetch(`${BASE_API_URL}/openai/chat/completion`, {
+    const res = await fetch(`${BASE_API_URL}/api/belle/chat/completion`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
