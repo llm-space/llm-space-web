@@ -4,7 +4,7 @@ import type { Message } from '../../messaging';
 import { AbstractChat } from '../AbstractChat';
 import type { SendMessageOptions } from '../Chat';
 
-const BASE_API_URL = '//localhost:3000/api';
+const BASE_API_URL = '//localhost:3000';
 
 export class GPTChat extends AbstractChat {
   constructor(readonly id: string, subject?: string) {
@@ -31,7 +31,7 @@ export class GPTChat extends AbstractChat {
     };
     this.appendMessage(streamingMessage);
 
-    const res = await fetch(`${BASE_API_URL}/openai/chat/completion?stream=true`, {
+    const res = await fetch(`${BASE_API_URL}/api/openai/chat/completion?stream=true`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
