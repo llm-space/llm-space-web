@@ -11,7 +11,7 @@ import { ChatListView } from '../components/ChatListView';
 import styles from './index.module.less';
 
 async function setup() {
-  const chat = await chatManager.newChat('gpt-3.5-turbo');
+  const chat = await chatManager.newChat(chatManager.providers[0].id);
   chatManager.addChat(chat);
   chatManager.activateChat(chat.id);
 }
