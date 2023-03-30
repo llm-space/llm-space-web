@@ -52,17 +52,19 @@ export function MessageBox({ className, chat, showPrompts, onSend: onSend }: Mes
   );
   return (
     <div className={cn(styles.container, className)}>
-      <Input.TextArea
-        autoSize
-        className={styles.textarea}
-        bordered={false}
-        placeholder="Type your message here"
-        value={message}
-        onCompositionStartCapture={handleIMEStart}
-        onCompositionEndCapture={handleIMEEnd}
-        onChange={(e) => handleChange(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
+      <main className={styles.main}>
+        <Input.TextArea
+          autoSize
+          className={styles.textarea}
+          bordered={false}
+          placeholder="Type your message here"
+          value={message}
+          onCompositionStartCapture={handleIMEStart}
+          onCompositionEndCapture={handleIMEEnd}
+          onChange={(e) => handleChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+      </main>
       {showPrompts && <Prompts chatId={chat.id} className={styles.prompts} onSelect={handlePromptSelect} />}
     </div>
   );
