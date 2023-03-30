@@ -24,8 +24,9 @@ if (devMode) {
 
 if (!process.env.OPENAI_API_KEY) {
   console.info('ERROR: Missing OPENAI_API_KEY environment variable.');
-  console.info('In the root folder of this project, please add a ".env" file as shown below, and restart the server.');
+  console.info('1. Add a `.env` file to the root of the project with the following content:');
   console.info('\n\nOPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n');
+  console.info('2. Restart the server.');
   process.exit(1);
 }
 
