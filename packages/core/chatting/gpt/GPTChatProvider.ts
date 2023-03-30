@@ -11,6 +11,9 @@ export class GPTChatProvider extends AbstractChatProvider {
   async newChat(subject?: string) {
     const id = uuid();
     const chat = new GPTChat(id, subject);
+    if (this.baseServiceURL) {
+      chat.baseServiceURL = this.baseServiceURL;
+    }
     return chat;
   }
 }

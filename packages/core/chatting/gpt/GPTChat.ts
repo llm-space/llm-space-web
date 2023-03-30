@@ -3,9 +3,11 @@ import { uuid } from '../../utils';
 import { AbstractChat } from '../AbstractChat';
 import type { SendMessageOptions } from '../Chat';
 
-const BASE_API_URL = '//localhost:3000';
+const DEFAULT_BASE_API_URL = '//localhost:3000';
 
 export class GPTChat extends AbstractChat {
+  baseServiceURL: string = DEFAULT_BASE_API_URL;
+
   constructor(readonly id: string, subject?: string) {
     super('gpt-3.5-turbo', id, subject);
   }
@@ -30,7 +32,7 @@ export class GPTChat extends AbstractChat {
     };
     this.appendMessage(streamingMessage);
 
-    const res = await fetch(`${BASE_API_URL}/api/openai/chat/completion?stream=true`, {
+    const res = await fetch(`${this.baseServiceURL}/api/openai/chat/completion?stream=true`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,9 +1,7 @@
 import { proxy } from 'valtio';
 
-import { BELLEChatProvider } from './belle';
 import type { Chat } from './Chat';
 import type { ChatProvider } from './ChatProvider';
-import { GPTChatProvider } from './gpt';
 
 export class ChatManager {
   readonly chats: Chat[] = [];
@@ -64,5 +62,3 @@ export class ChatManager {
 }
 
 export const chatManager = proxy(new ChatManager());
-chatManager.registerChatProvider(new GPTChatProvider());
-chatManager.registerChatProvider(new BELLEChatProvider());

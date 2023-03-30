@@ -12,6 +12,9 @@ export class BELLEChatProvider extends AbstractChatProvider {
   async newChat(subject?: string) {
     const id = uuid();
     const chat = new BELLEChat(id, subject);
+    if (this.baseServiceURL) {
+      chat.baseServiceURL = this.baseServiceURL;
+    }
     return chat;
   }
 }
