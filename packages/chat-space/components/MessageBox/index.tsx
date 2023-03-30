@@ -2,17 +2,20 @@ import { Input } from 'antd';
 import cn from 'classnames';
 import React, { useCallback, useState } from 'react';
 
+import type { Chat } from '@/core';
+
 import { Prompts } from '../Prompts';
 
 import styles from './index.module.less';
 
 export interface MessageBoxProps {
   className?: string;
+  chat: Chat;
   showPrompts?: boolean;
   onSend?: (message: string) => void;
 }
 
-export function MessageBox({ className, showPrompts, onSend: onSend }: MessageBoxProps) {
+export function MessageBox({ className, chat, showPrompts, onSend: onSend }: MessageBoxProps) {
   const [message, setMessage] = useState('');
   const [imeStatus, setImeStatus] = useState(false);
   const handleChange = useCallback((value: string) => {
@@ -60,7 +63,7 @@ export function MessageBox({ className, showPrompts, onSend: onSend }: MessageBo
         onChange={(e) => handleChange(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      {showPrompts && <Prompts className={styles.prompts} onSelect={handlePromptSelect} />}
+      {showPrompts && <Prompts chatId={chat.id} className={styles.prompts} onSelect={handlePromptSelect} />}
     </div>
   );
 }

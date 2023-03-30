@@ -39,7 +39,12 @@ export function ChatDetailView({ className, data, onSend }: ChatDetailViewProps)
       </header>
       <main className={styles.main}>
         <MessageListView className={styles.messageList} data={data.messages} />
-        <MessageBox className={styles.messageBox} showPrompts={data.messages.length == 0} onSend={handleSendMessage} />
+        <MessageBox
+          className={styles.messageBox}
+          chat={data}
+          showPrompts={data.messages.length == 0}
+          onSend={handleSendMessage}
+        />
       </main>
     </div>
   );
