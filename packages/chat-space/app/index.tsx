@@ -11,9 +11,11 @@ import { ChatListView } from '../components/ChatListView';
 import styles from './index.module.less';
 
 async function setup() {
-  const chat = await chatManager.newChat(chatManager.providers[0].id);
-  chatManager.addChat(chat);
-  chatManager.activateChat(chat.id);
+  if (chatManager.chats.length === 0) {
+    const chat = await chatManager.newChat(chatManager.providers[0].id);
+    chatManager.addChat(chat);
+  }
+  chatManager.activateChat(chatManager.chats[0].id);
 }
 setup();
 
