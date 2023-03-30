@@ -16,11 +16,11 @@ export function MainMenu({ className }: MainMenuProps) {
           <MessageOutlined className={cn(styles.icon, styles.active)} />
         </li>
       </Tooltip>
-      <Tooltip title="TalkSpace" placement="right">
+      {/* <Tooltip title="TalkSpace" placement="right">
         <li>
           <SoundOutlined className={styles.icon} />
         </li>
-      </Tooltip>
+      </Tooltip> */}
     </menu>
   );
 }
