@@ -90,8 +90,9 @@ app.post('/api/openai/chat/completion', async (req, res) => {
   }
 });
 
-app.listen(8000, () => {
-  console.log('LLMSpace server is now running at port 3000.');
+const port = devMode ? 5173 : 3000;
+app.listen(port, () => {
+  console.log(`LLMSpace server is now running at http://localhost:${port}.`);
 });
 
 function convertMessageToChatCompletionRequestMessage(message: Message): ChatCompletionRequestMessage {
